@@ -2,13 +2,42 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: monospace;
 }
 
-body {
-    height: 100vh;
+header {
+    height: 100px;
+    width: 100%;
+    background-color: #282A36;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+h1 {
+    color: white;
+    font-size: 35px;
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: 25px;
+}
+
+section {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Random cocktail button */
+.randomCocktailBtn {
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: white;
+    background-color: #5E34BE;
 }
 
 /* Search bar */
@@ -46,4 +75,22 @@ body {
 
 #searchBtn:hover {
     background-color: plum;
+}
+
+/* Recipe result including cocktail image, ingredients, and instructions */
+.recipeResult {
+    height: 650px;
+    width: 425px;
+    background-color: #C0ECF5;
+    border-radius: 30px;
+    margin: 20px 0;
+}
+
+/* Random Joke Display */
+.randomJokeDisplay {
+    height: 150px;
+    width: 650px;
+    background-color: #E5C3F5;
+    border-radius: 30px;
+    margin: 20px 0;
 }
