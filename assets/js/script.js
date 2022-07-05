@@ -1,3 +1,6 @@
+
+// Cocktails---Variable
+
 // Function to toggle modal prompting user that cockatil has not been found
 // function noCocktail() {
   
@@ -38,6 +41,7 @@ $( function() {
   } );
 
   // Cocktails---Variable
+
 let randomEleHolder = document.querySelector('#randomEleHolder')
 const cardCocktail = document.querySelector('#card-cocktail')
 // Random button---Variable
@@ -356,7 +360,6 @@ randomBtn.addEventListener('click', function (e) {
       createRandomDiv.appendChild(createRandomInstructions)
     })
 })
-
 
 
 
