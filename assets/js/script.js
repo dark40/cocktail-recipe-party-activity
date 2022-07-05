@@ -1,7 +1,10 @@
 // Function to toggle modal prompting user that cockatil has not been found
-function noCocktail() {
-    $('#modal').modal('toggle');
-}
+// function noCocktail() {
+  
+// }
+
+// noCocktail()
+
 
 // Function for autocomplete cocktail search
 $( function() {
@@ -33,3 +36,5 @@ $( function() {
       source: availableCocktails
     });
   } );
+
+ 
