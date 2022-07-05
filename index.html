@@ -16,12 +16,42 @@
 </head>
 
 <body>
+    <header>
+        <h1>Cocktail Recipe Finder</h1>
+    </header>
 
-    <!-- Search bar: Provides search functionality -->
-    <form class="searchBar">
-        <input id="userInput" type="text" placeholder="Search Cocktail...">
-        <button id="searchBtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </form>
+    <!-- Random cocktail generator section -->
+    <section>
+        <h2>Random Cocktail Generator</h2>
+        <button class="randomCocktailBtn">Random Cocktail</button>
+        <h2>OR</h2>
+    </section>
+
+    <!-- Search section: Provides search functionality -->
+    <section>
+        <form class="searchBar">
+            <input id="userInput" type="text" placeholder="Search Cocktail...">
+            <button id="searchBtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        <!-- append recent searches to ul -->
+        <div>
+            <ul></ul>
+        </div>
+    </section>
+
+    <!-- Random cocktail gallery -->
+    <section></section>
+
+    <!-- Cocktail recipe search results -->
+    <section>
+        <div class="recipeResult"></div>
+    </section>
+
+    <!-- Random Jokes Element -->
+    <section>
+        <div class="randomJokeDisplay"></div>
+    </section>
+
 
     <div class="buttonHolder">
         <h3>Random Cocktail Generator</h3>
@@ -39,6 +69,10 @@
     <div id="card-cocktail"></div>
     <br>
 
+
+
+
+
 <div></div>
 
 
@@ -51,3 +85,4 @@
 </body>
 
 </html>
+
