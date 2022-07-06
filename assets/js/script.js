@@ -1,3 +1,4 @@
+
 // Function to provide search functionality to search bar
 var form = document.querySelector(".searchBar")
 form.addEventListener("submit", function(event) {
@@ -13,7 +14,7 @@ form.addEventListener("submit", function(event) {
   if (!randomEleHolder.classList.contains('hide')) {
     randomEleHolder.classList.add('hide');
   }
-  
+
   // console.log("submitted")
   var userInput = form.inputBox.value
   var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${userInput}`
@@ -188,6 +189,7 @@ function getAllNames() {
   }
 }
 
+var recipeResult = document.querySelector(".recipeResult")
 
 
 
@@ -387,6 +389,7 @@ let timer = setInterval(function () {
   getRandom();
 }, 5000)
 
+
 // mouse over, stop timer
 randomEleHolder.addEventListener('mouseenter', function () {
   clearInterval(timer)
@@ -525,7 +528,6 @@ randomBtn.addEventListener('click', function (e) {
       // createRandomDiv.appendChild(createRandomIngredients)
       createRandomDiv.appendChild(createRandomInstructions)
     })
-  
 })
 
 
