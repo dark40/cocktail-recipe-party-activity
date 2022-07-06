@@ -1,14 +1,54 @@
+/* reset page style */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
 }
 
-body {
-    height: 100vh;
+header {
+    height: 100px;
+    width: 100%;
+    background-color: #282A36;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+h1 {
+    color: white;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: 25px;
+}
+
+h3 {
+  padding: 5px 0 10px 0;  
+  font-size: 25px;
+}
+
+
+section {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Random cocktail button */
+.randomBtn {
+    padding: 8px 20px;
+    border-radius: 15px;
+    color: white;
+    background-color: #5E34BE;
+    font-size: 20px;
 }
 
 /* Search bar */
@@ -40,10 +80,80 @@ body {
     min-height: 40px;
     border-radius: 50%;
     margin-right: 5px;
-    background-color: rgb(174, 213, 245);
+    background-color: rgb(182, 244, 247);
     transition: background-color 300ms ease-in-out;
 }
 
 #searchBtn:hover {
-    background-color: plum;
+    background-color: #E5C3F5;
 }
+
+/* Set style for random drink feature */
+.randomEleHolder {
+    border-radius: 20px;
+    height: auto;
+    min-height: 325px;
+    width: 300px;
+    padding: 20px 20px 0 20px;
+    font-family: sans-serif;
+    background-color: #E5C3F5;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 20px;
+    transition: all 2s;
+}
+
+.align_left {
+    text-align: left;
+}
+
+.textWeight {
+    font-weight: 700;
+}
+
+.randomEleHolder:hover {
+    transform: scale(1.1);
+}
+
+.randomImg {
+    border-radius: 10px;
+    height: 245px;
+    width: 100%;
+}
+
+.card-img-cocktail {
+    height: 350px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* set style for ingredients list  */
+
+.ingredient-list {
+    padding-left: 20px;
+}
+
+/* set style for hide card */
+.hide {
+    display: none;
+}
+
+/* Recipe result including cocktail image, ingredients, and instructions */
+.recipeResult {
+    height: auto;
+    width: 425px;
+    background-color: #C0ECF5;
+    border-radius: 30px;
+    margin: 20px 0;
+    padding: 25px;
+}
+
+/* Random Joke Display */
+.randomJokeDisplay {
+    height: 150px;
+    width: 500px;
+    background-color: #E5C3F5;
+    border-radius: 30px;
+    margin: 20px 0;
+}
+
