@@ -159,9 +159,23 @@ section {
     line-height: 50px;
 }
 
+
+#searchHistory {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 700px;
+    flex-wrap: wrap;
+}
+
+#searchHistory div{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
 .randomJokeDisplay p {
     display: inline-block;
     vertical-align: middle;
   }
+
 
 

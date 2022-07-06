@@ -1,34 +1,8 @@
 
 // Function to provide search functionality to search bar
-var form = document.querySelector(".searchBar")
-form.addEventListener("submit", function (event) {
-  event.preventDefault()
-  cardCocktail.innerHTML = "";
 
-  // Checks if recipe results have class 'hide' if so remove
-  if (recipeResult.classList.contains('hide')) {
-    recipeResult.classList.remove('hide');
-  }
-
-  // Checks if random gallery is not hidden, add hide
-  if (!randomEleHolder.classList.contains('hide')) {
-    randomEleHolder.classList.add('hide');
-  }
-
-  // Display the jokes.
-  randomJokes();
-  displayJokes();
-
-  // console.log("submitted")
-  var userInput = form.inputBox.value
-  var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${userInput}`
-  fetch(serachNameUrl)
-    .then(function (response) {
-      var res = response.json()
-      return res
-    })
-    .then(function (data) {
-      // get values 
+var form = document.querySelector(".searchBar");
+function handleDataFromAPI(data) {
       const randomDrink = data.drinks[0]
       const drinkName = randomDrink.strDrink
       const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
@@ -137,9 +111,115 @@ form.addEventListener("submit", function (event) {
       }
       // createRandomDiv.appendChild(createRandomIngredients)
       createRandomDiv.appendChild(createRandomInstructions)
+}
+
+function hidePrevResult() {
+  if (recipeResult.classList.contains('hide')) {
+    recipeResult.classList.remove('hide');
+  }
+
+  // Checks if random gallery is not hidden, add hide
+  if (!randomEleHolder.classList.contains('hide')) {
+    randomEleHolder.classList.add('hide');
+  }
+}
+
+function handleSubmit(event) {
+    event.preventDefault()
+    cardCocktail.innerHTML = "";
+
+    hidePrevResult();
+
+  // console.log("submitted")
+  var userInput = form.inputBox.value
+  var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${userInput}`
+  fetch(serachNameUrl)
+    .then(function (response) {
+      var res = response.json()
+      return res
+    })
+    .then(function (data) {
+      storeHistory(userInput);
+    
+      displayHistory();
+      handleDataFromAPI(data);
+
     })
   form.inputBox.value = "";
-})
+}
+
+form.addEventListener("submit", handleSubmit);
+
+/**
+ * Search History code start from here
+ */
+
+let searchHistory = $("#searchHistory");
+let drink;
+
+function handleClickonHistory(){
+    
+      drink = $(this).text();
+  cardCocktail.innerHTML = "";
+  hidePrevResult();
+  var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
+  fetch(serachNameUrl)
+    .then(function (response) {
+      var res = response.json()
+      return res
+    })
+    .then(function (data) {
+      handleDataFromAPI(data);
+    })
+  }
+  
+
+
+
+function storeHistory(history) {
+      if (history) {
+        let historyList = (localStorage.getItem("cocktail-history") === null) ? [] : JSON.parse(localStorage.getItem("cocktail-history"));
+
+        if (!historyList.includes(history)) {
+            historyList = [...historyList, history];
+        }
+        localStorage.setItem("cocktail-history", JSON.stringify(historyList));
+    }
+}
+
+function displayHistory(){
+    let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
+    searchHistory.empty();
+    
+    if (historyList) {
+      for (let i = 0; i < historyList.length; i++) {
+        let historyItemEl = $("<div class='block'></div>");
+        let historySpanEl = $("<span class='tag is-info button is-light'>" + historyList[i] + "</span>");
+        let deleteBtnEl = $("<button class='delete is-small'></button>");
+        deleteBtnEl.click(handleDelete);
+        historySpanEl.append(deleteBtnEl);
+        historyItemEl.append(historySpanEl);
+        historyItemEl.click(handleClickonHistory);
+        
+        searchHistory.append(historyItemEl);
+      }
+    }
+}
+
+function handleDelete(e) {
+  e.stopPropagation();
+  let history = $(this).parent().text();
+  let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
+  historyList = historyList.filter(element => element !== history);
+  localStorage.setItem("cocktail-history", JSON.stringify(historyList));
+  $(this).parent().remove();
+}
+
+displayHistory();
+
+/**
+ * Search History code end at here
+ */
 
 var allCocktailNames = []
 var allUrls = [
