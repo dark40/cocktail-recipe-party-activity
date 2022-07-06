@@ -1,7 +1,7 @@
 
 // Function to provide search functionality to search bar
 var form = document.querySelector(".searchBar")
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function (event) {
   event.preventDefault()
   cardCocktail.innerHTML = "";
 
@@ -14,6 +14,10 @@ form.addEventListener("submit", function(event) {
   if (!randomEleHolder.classList.contains('hide')) {
     randomEleHolder.classList.add('hide');
   }
+
+  // Display the jokes.
+  randomJokes();
+  displayJokes();
 
   // console.log("submitted")
   var userInput = form.inputBox.value
@@ -169,23 +173,23 @@ getAllNames()
 // Function to get all cocktail names and put them into an array
 function getAllNames() {
   // For loop to fetch each url searching by first letter
-  for (i=0; i<allUrls.length; i++) {
+  for (i = 0; i < allUrls.length; i++) {
     var firstLetterSearch = allUrls[i]
 
     fetch(firstLetterSearch)
-    .then(function (response) {
-    const res = response.json()
-    return res
-    })
-    .then(function (data) {
-    const array = data['drinks']
-    // For each individual url letter search, get name of each cocktail
-    for (i=0; i<array.length; i++) {
-      const drinkName = data['drinks'][i]['strDrink']
-      // Append name of cocktail to allCocktailNames
-      allCocktailNames.push(drinkName);
-      }
-    })
+      .then(function (response) {
+        const res = response.json()
+        return res
+      })
+      .then(function (data) {
+        const array = data['drinks']
+        // For each individual url letter search, get name of each cocktail
+        for (i = 0; i < array.length; i++) {
+          const drinkName = data['drinks'][i]['strDrink']
+          // Append name of cocktail to allCocktailNames
+          allCocktailNames.push(drinkName);
+        }
+      })
   }
 }
 
@@ -196,14 +200,14 @@ var recipeResult = document.querySelector(".recipeResult")
 var recipeResult = document.querySelector(".recipeResult")
 
 // Function for autocomplete cocktail search
-$( function() {
-    var availableCocktails = allCocktailNames;
-    $( "#userInput" ).autocomplete({
-      source: availableCocktails
-    });
-  } );
+$(function () {
+  var availableCocktails = allCocktailNames;
+  $("#userInput").autocomplete({
+    source: availableCocktails
+  });
+});
 
-  // Cocktails---Variable
+// Cocktails---Variable
 
 let randomEleHolder = document.querySelector('#randomEleHolder')
 const cardCocktail = document.querySelector('#card-cocktail')
@@ -298,6 +302,11 @@ function getRandom() {
       // when click on randomEleHolder, it will rander search result by ID
       const container = document.createElement('div');
       container.addEventListener('click', function () {
+
+        // Display the jokes.
+        randomJokes();
+        displayJokes();
+
         cardCocktail.innerHTML = ''
         randomEleHolder.classList.add('hide')
         recipeResult.classList.remove('hide')
@@ -406,7 +415,12 @@ randomEleHolder.addEventListener('mouseleave', function () {
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
   cardCocktail.innerHTML = ''
-  
+
+  // Display the jokes.
+  randomJokes();
+  displayJokes();
+
+
   // Checks if recipe results have class 'hide' if so remove
   if (recipeResult.classList.contains('hide')) {
     recipeResult.classList.remove('hide');
@@ -529,6 +543,51 @@ randomBtn.addEventListener('click', function (e) {
       createRandomDiv.appendChild(createRandomInstructions)
     })
 })
+
+// Random Jokes function
+function randomJokes() {
+  const jokesURL = "https://v2.jokeapi.dev/joke/Any";
+
+  fetch(jokesURL)
+    .then(function (response) {
+      if (!response.ok) {
+        throw response.json();
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      showJokes(data);
+    })
+    .catch(console.err);
+
+};
+
+function showJokes(obj) {
+
+  let jokeEl = document.querySelector(".randomJokeDisplay");
+
+  jokeEl.replaceChildren();
+
+
+  let joke = document.createElement("p");
+  joke.innerHTML = obj.joke || [];
+
+  let jokeSetup = document.createElement("p");
+  jokeSetup.innerHTML = obj.setup || [];
+
+  let jokeDelivery = document.createElement("p");
+  jokeDelivery.innerHTML = obj.delivery || [];
+
+  jokeEl.append(jokeSetup, jokeDelivery, joke);
+}
+
+
+// Set time interval for showing jokes every 5 seconds.
+function displayJokes() {
+  setInterval(function () {
+    randomJokes();
+  }, 5000);
+}
 
 
 
