@@ -87,7 +87,7 @@ section {
 }
 
 .card-cocktail {
-    margin: 0 auto;
+    margin: 20px auto;
     border-radius: 10px;
     font-family: sans-serif;
     width: 280px;
@@ -119,12 +119,6 @@ section {
 }
 
 /* set style for random button part*/
-.buttonHolder {
-    font-family: sans-serif;
-    line-height: 40px;
-    padding: 50px;
-    text-align: center
-}
 
 .randomBtn {   
     width: 150px;
