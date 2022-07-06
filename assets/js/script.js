@@ -112,11 +112,7 @@ function handleDataFromAPI(data) {
       createRandomDiv.appendChild(createRandomInstructions)
 }
 
-function handleSubmit(event) {
-    event.preventDefault()
-  cardCocktail.innerHTML = "";
-
-  // Checks if recipe results have class 'hide' if so remove
+function hidePrevResult() {
   if (recipeResult.classList.contains('hide')) {
     recipeResult.classList.remove('hide');
   }
@@ -125,6 +121,13 @@ function handleSubmit(event) {
   if (!randomEleHolder.classList.contains('hide')) {
     randomEleHolder.classList.add('hide');
   }
+}
+
+function handleSubmit(event) {
+    event.preventDefault()
+    cardCocktail.innerHTML = "";
+
+    hidePrevResult();
 
   // console.log("submitted")
   var userInput = form.inputBox.value
