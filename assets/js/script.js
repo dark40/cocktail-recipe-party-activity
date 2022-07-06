@@ -3,6 +3,7 @@
 
 var form = document.querySelector(".searchBar");
 function handleDataFromAPI(data) {
+      cardCocktail.innerHTML = "";
       const randomDrink = data.drinks[0]
       const drinkName = randomDrink.strDrink
       const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
@@ -126,7 +127,6 @@ function hidePrevResult() {
 
 function handleSubmit(event) {
     event.preventDefault()
-    cardCocktail.innerHTML = "";
 
     hidePrevResult();
 
@@ -145,7 +145,6 @@ function handleSubmit(event) {
       handleDataFromAPI(data);
 
     })
-  form.inputBox.value = "";
 }
 
 form.addEventListener("submit", handleSubmit);
@@ -160,7 +159,6 @@ let drink;
 function handleClickonHistory(){
     
       drink = $(this).text();
-  cardCocktail.innerHTML = "";
   hidePrevResult();
   var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
   fetch(serachNameUrl)
@@ -383,7 +381,7 @@ function getRandom() {
         randomJokes();
         displayJokes();
 
-        cardCocktail.innerHTML = ''
+        
         randomEleHolder.classList.add('hide')
         recipeResult.classList.remove('hide')
         const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`
@@ -399,6 +397,7 @@ function getRandom() {
             // rander data into card
 
             // random img element
+            cardCocktail.innerHTML = ''
             let createRandomImg = document.createElement('img')
             createRandomImg.src = drinkImg
             createRandomImg.alt = drinkName
@@ -490,7 +489,6 @@ randomEleHolder.addEventListener('mouseleave', function () {
 // add event listener for button
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
-  cardCocktail.innerHTML = ''
 
   // prevent multiple click
   randomBtn.setAttribute("disabled", "true")
@@ -521,6 +519,7 @@ randomBtn.addEventListener('click', function (e) {
     })
     .then(function (data) {
       // get values 
+      cardCocktail.innerHTML = ''
       const randomDrink = data.drinks[0]
       const drinkName = randomDrink.strDrink
       const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
