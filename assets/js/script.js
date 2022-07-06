@@ -1,30 +1,7 @@
 
 // Function to provide search functionality to search bar
-var form = document.querySelector(".searchBar")
-function handleSubmit(event) {
-    event.preventDefault()
-  cardCocktail.innerHTML = "";
-
-  // Checks if recipe results have class 'hide' if so remove
-  if (recipeResult.classList.contains('hide')) {
-    recipeResult.classList.remove('hide');
-  }
-
-  // Checks if random gallery is not hidden, add hide
-  if (!randomEleHolder.classList.contains('hide')) {
-    randomEleHolder.classList.add('hide');
-  }
-
-  // console.log("submitted")
-  var userInput = form.inputBox.value
-  var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${userInput}`
-  fetch(serachNameUrl)
-    .then(function (response) {
-      var res = response.json()
-      return res
-    })
-    .then(function (data) {
-      // get values 
+var form = document.querySelector(".searchBar");
+function handleDataFromAPI(data) {
       const randomDrink = data.drinks[0]
       const drinkName = randomDrink.strDrink
       const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
@@ -133,6 +110,33 @@ function handleSubmit(event) {
       }
       // createRandomDiv.appendChild(createRandomIngredients)
       createRandomDiv.appendChild(createRandomInstructions)
+}
+
+function handleSubmit(event) {
+    event.preventDefault()
+  cardCocktail.innerHTML = "";
+
+  // Checks if recipe results have class 'hide' if so remove
+  if (recipeResult.classList.contains('hide')) {
+    recipeResult.classList.remove('hide');
+  }
+
+  // Checks if random gallery is not hidden, add hide
+  if (!randomEleHolder.classList.contains('hide')) {
+    randomEleHolder.classList.add('hide');
+  }
+
+  // console.log("submitted")
+  var userInput = form.inputBox.value
+  var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${userInput}`
+  fetch(serachNameUrl)
+    .then(function (response) {
+      var res = response.json()
+      return res
+    })
+    .then(function (data) {
+      handleDataFromAPI(data);
+
     })
   form.inputBox.value = "";
 }
