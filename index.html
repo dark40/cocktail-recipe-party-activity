@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    
-
     <script src="https://kit.fontawesome.com/636d17f0de.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Cockatil Recipe Finder</title>
 
@@ -24,7 +24,9 @@
     <!-- Random cocktail generator section -->
     <section>
         <h2>Random Cocktail Generator</h2>
-        <button class="randomCocktailBtn">Random Cocktail</button>
+        <div class="buttonHolder">
+            <button id="randomBtn" class="randomBtn">Random Cocktail</button>
+        </div>
         <h2>OR</h2>
     </section>
 
@@ -41,42 +43,24 @@
     </section>
 
     <!-- Random cocktail gallery -->
-    <section></section>
+    <section>
+        <div id="randomEleHolder" class="randomEleHolder">
+            <!-- <img id="randomDrinkImg" class="randomDrinkImg" src="#" alt="Drinks Img">
+            <h3 id="drinkName">Drink Name:</h3>       
+            <p>Ingredients:</p>
+            <p id="randomDrinkInstructions" class="randomDrinkInstructions">instructions</p> -->
+        </div>       
+    </section>
 
     <!-- Cocktail recipe search results -->
     <section>
-        <div class="recipeResult"></div>
+        <div id="card-cocktail" class="recipeResult hide"></div>
     </section>
 
     <!-- Random Jokes Element -->
     <section>
         <div class="randomJokeDisplay"></div>
     </section>
-
-
-    <div class="buttonHolder">
-        <h3>Random Cocktail Generator</h3>
-        <button id="randomBtn" class="randomBtn">Random Coketail</button>
-    </div>
-    
-    <br>
-    <div id="randomEleHolder" class="randomEleHolder">
-        <!-- <img id="randomDrinkImg" class="randomDrinkImg" src="#" alt="Drinks Img">
-        <h3 id="drinkName">Drink Name:</h3>       
-        <p>Ingredients:</p>
-        <p id="randomDrinkInstructions" class="randomDrinkInstructions">instructions</p> -->
-    </div>
-    <!-- card holder  -->
-    <div id="card-cocktail"></div>
-    <br>
-
-
-
-
-
-<div></div>
-
-
 
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
