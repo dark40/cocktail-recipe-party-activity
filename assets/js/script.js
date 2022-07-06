@@ -157,7 +157,8 @@ let searchHistory = $("#searchHistory");
 let drink;
 
 function handleClickonHistory(){
-  drink = $(this).text();
+    
+      drink = $(this).text();
   cardCocktail.innerHTML = "";
   hidePrevResult();
   var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
@@ -169,7 +170,10 @@ function handleClickonHistory(){
     .then(function (data) {
       handleDataFromAPI(data);
     })
-}
+  }
+  
+
+
 
 function storeHistory(history) {
       if (history) {
@@ -185,13 +189,29 @@ function storeHistory(history) {
 function displayHistory(){
     let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
     searchHistory.empty();
+    
     if (historyList) {
-      for (let historyItem of historyList) {
-        let historyItemEl = $("<button type='submit' class='button is-link is-light'>" + historyItem + "</button>");
+      for (let i = 0; i < historyList.length; i++) {
+        let historyItemEl = $("<div class='block'></div>");
+        let historySpanEl = $("<span class='tag is-info button is-light'>" + historyList[i] + "</span>");
+        let deleteBtnEl = $("<button class='delete is-small'></button>");
+        deleteBtnEl.click(handleDelete);
+        historySpanEl.append(deleteBtnEl);
+        historyItemEl.append(historySpanEl);
         historyItemEl.click(handleClickonHistory);
+        
         searchHistory.append(historyItemEl);
       }
     }
+}
+
+function handleDelete(e) {
+  e.stopPropagation();
+  let history = $(this).parent().text();
+  let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
+  historyList = historyList.filter(element => element !== history);
+  localStorage.setItem("cocktail-history", JSON.stringify(historyList));
+  $(this).parent().remove();
 }
 
 displayHistory();

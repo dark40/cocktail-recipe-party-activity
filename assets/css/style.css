@@ -162,11 +162,9 @@ section {
     justify-content: space-evenly;
     max-width: 700px;
     flex-wrap: wrap;
-
 }
 
-#searchHistory * {
-    display: block;
+#searchHistory div{
     margin-left: 10px;
     margin-top: 10px;
 }
