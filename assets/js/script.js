@@ -138,6 +138,9 @@ function handleSubmit(event) {
       return res
     })
     .then(function (data) {
+      storeHistory(userInput);
+    
+      displayHistory();
       handleDataFromAPI(data);
 
     })
@@ -166,6 +169,17 @@ function handleClickonHistory(){
     .then(function (data) {
       handleDataFromAPI(data);
     })
+}
+
+function storeHistory(history) {
+      if (history) {
+        let historyList = (localStorage.getItem("cocktail-history") === null) ? [] : JSON.parse(localStorage.getItem("cocktail-history"));
+
+        if (!historyList.includes(history)) {
+            historyList = [...historyList, history];
+        }
+        localStorage.setItem("cocktail-history", JSON.stringify(historyList));
+    }
 }
 
 function displayHistory(){
