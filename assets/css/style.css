@@ -157,3 +157,17 @@ section {
     margin: 20px 0;
 }
 
+#searchHistory {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 700px;
+    flex-wrap: wrap;
+
+}
+
+#searchHistory * {
+    display: block;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
