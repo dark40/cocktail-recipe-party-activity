@@ -3,7 +3,7 @@
 
 // Function to toggle modal prompting user that cockatil has not been found
 // function noCocktail() {
-  
+
 // }
 
 // noCocktail()
@@ -11,37 +11,37 @@
 var recipeResult = document.querySelector(".recipeResult")
 
 // Function for autocomplete cocktail search
-$( function() {
-    var availableCocktails = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#userInput" ).autocomplete({
-      source: availableCocktails
-    });
-  } );
+$(function () {
+  var availableCocktails = [
+    "ActionScript",
+    "AppleScript",
+    "Asp",
+    "BASIC",
+    "C",
+    "C++",
+    "Clojure",
+    "COBOL",
+    "ColdFusion",
+    "Erlang",
+    "Fortran",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    "Lisp",
+    "Perl",
+    "PHP",
+    "Python",
+    "Ruby",
+    "Scala",
+    "Scheme"
+  ];
+  $("#userInput").autocomplete({
+    source: availableCocktails
+  });
+});
 
-  // Cocktails---Variable
+// Cocktails---Variable
 
 let randomEleHolder = document.querySelector('#randomEleHolder')
 const cardCocktail = document.querySelector('#card-cocktail')
@@ -243,7 +243,20 @@ randomEleHolder.addEventListener('mouseleave', function () {
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
   cardCocktail.innerHTML = ''
-  
+
+  // prevent multiple click
+  randomBtn.setAttribute("disabled", "true")
+  let i = 5
+  let timer = setInterval(function () {
+    i--
+    randomBtn.innerHTML = `Random Coketail(${i})`
+    if (i === 0) {
+      clearInterval(timer)
+      randomBtn.disabled = false
+      randomBtn.innerHTML = `Random Coketail`
+    }
+  }, 1000)
+
   // Checks if recipe results have class 'hide' if so remove
   if (recipeResult.classList.contains('hide')) {
     recipeResult.classList.remove('hide');
