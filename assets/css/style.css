@@ -150,12 +150,15 @@ section {
 
 /* Random Joke Display */
 .randomJokeDisplay {
-    height: 150px;
+    height: auto;
     width: 500px;
     background-color: #E5C3F5;
     border-radius: 30px;
     margin: 20px 0;
+    text-align: center;
+    line-height: 50px;
 }
+
 
 #searchHistory {
     display: flex;
@@ -168,4 +171,11 @@ section {
     margin-left: 10px;
     margin-top: 10px;
 }
+
+.randomJokeDisplay p {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+
 
