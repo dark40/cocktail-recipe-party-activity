@@ -1,8 +1,8 @@
 
 // Function to provide search functionality to search bar
 var form = document.querySelector(".searchBar")
-form.addEventListener("submit", function(event) {
-  event.preventDefault()
+function handleSubmit(event) {
+    event.preventDefault()
   cardCocktail.innerHTML = "";
 
   // Checks if recipe results have class 'hide' if so remove
@@ -135,7 +135,9 @@ form.addEventListener("submit", function(event) {
       createRandomDiv.appendChild(createRandomInstructions)
     })
   form.inputBox.value = "";
-})
+}
+
+form.addEventListener("submit", handleSubmit);
 
 var allCocktailNames = []
 var allUrls = [
