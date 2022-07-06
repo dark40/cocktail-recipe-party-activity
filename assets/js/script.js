@@ -16,7 +16,6 @@ form.addEventListener("submit", function (event) {
   }
 
   // Display the jokes.
-  randomJokes();
   displayJokes();
 
   // console.log("submitted")
@@ -300,7 +299,7 @@ function getRandom() {
       container.addEventListener('click', function () {
 
         // Display the jokes.
-        randomJokes();
+
         displayJokes();
 
         cardCocktail.innerHTML = ''
@@ -426,7 +425,7 @@ randomBtn.addEventListener('click', function (e) {
   }, 1000)
 
   // Display the jokes.
-  randomJokes();
+
   displayJokes();
 
   // Checks if recipe results have class 'hide' if so remove
@@ -591,13 +590,20 @@ function showJokes(obj) {
 
 
 // Set time interval for showing jokes every 5 seconds.
+
 function displayJokes() {
-  setInterval(function () {
-    randomJokes();
-  }, 5000);
+
+  randomJokes();
+  repeatJoke;
 }
 
+var repeatJoke = setInterval(function () {
+  randomJokes();
+}, 5000);
 
+function stopRepeat () {
+  clearInterval(repeatJoke);
+}
 
 
 
