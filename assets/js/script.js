@@ -146,6 +146,46 @@ function handleSubmit(event) {
 
 form.addEventListener("submit", handleSubmit);
 
+/**
+ * Search History code start from here
+ */
+
+let searchHistory = $("#searchHistory");
+let drink;
+
+function handleClickonHistory(){
+  drink = $(this).text();
+  cardCocktail.innerHTML = "";
+  hidePrevResult();
+  var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
+  fetch(serachNameUrl)
+    .then(function (response) {
+      var res = response.json()
+      return res
+    })
+    .then(function (data) {
+      handleDataFromAPI(data);
+    })
+}
+
+function displayHistory(){
+    let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
+    searchHistory.empty();
+    if (historyList) {
+      for (let historyItem of historyList) {
+        let historyItemEl = $("<button type='submit' class='button is-link is-light'>" + historyItem + "</button>");
+        historyItemEl.click(handleClickonHistory);
+        searchHistory.append(historyItemEl);
+      }
+    }
+}
+
+displayHistory();
+
+/**
+ * Search History code end at here
+ */
+
 var allCocktailNames = []
 var allUrls = [
   "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a",
