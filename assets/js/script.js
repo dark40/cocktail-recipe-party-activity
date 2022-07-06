@@ -8,6 +8,7 @@
 
 // noCocktail()
 
+var recipeResult = document.querySelector(".recipeResult")
 
 // Function for autocomplete cocktail search
 $( function() {
@@ -137,6 +138,7 @@ function getRandom() {
       container.addEventListener('click', function () {
         cardCocktail.innerHTML = ''
         randomEleHolder.classList.add('hide')
+        recipeResult.classList.remove('hide')
         const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`
         fetch(url)
           .then(function (response) {
@@ -207,7 +209,6 @@ function getRandom() {
       // random drink name
       let createRandomDrinkName = document.createElement('h3')
       createRandomDrinkName.textContent = drinkName
-      createRandomDrinkName.classList.add('setPaddingTop')
       // append element
       container.appendChild(createRandomImg)
       container.appendChild(createRandomDrinkName)
@@ -242,6 +243,11 @@ randomEleHolder.addEventListener('mouseleave', function () {
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
   cardCocktail.innerHTML = ''
+  
+  // Checks if recipe results have class 'hide' if so remove
+  if (recipeResult.classList.contains('hide')) {
+    recipeResult.classList.remove('hide');
+  }
   randomEleHolder.classList.add('hide')
   const randomUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   fetch(randomUrl)
