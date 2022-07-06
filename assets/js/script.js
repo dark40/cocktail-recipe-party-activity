@@ -195,10 +195,6 @@ function getAllNames() {
 
 var recipeResult = document.querySelector(".recipeResult")
 
-
-
-var recipeResult = document.querySelector(".recipeResult")
-
 // Function for autocomplete cocktail search
 $(function () {
   var availableCocktails = allCocktailNames;
@@ -416,10 +412,22 @@ randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
   cardCocktail.innerHTML = ''
 
+  // prevent multiple click
+  randomBtn.setAttribute("disabled", "true")
+  let i = 5
+  let timer = setInterval(function () {
+    i--
+    randomBtn.innerHTML = `Random Coketail(${i})`
+    if (i === 0) {
+      clearInterval(timer)
+      randomBtn.disabled = false
+      randomBtn.innerHTML = `Random Coketail`
+    }
+  }, 1000)
+
   // Display the jokes.
   randomJokes();
   displayJokes();
-
 
   // Checks if recipe results have class 'hide' if so remove
   if (recipeResult.classList.contains('hide')) {
