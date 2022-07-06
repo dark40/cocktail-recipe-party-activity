@@ -378,7 +378,6 @@ function getRandom() {
       container.addEventListener('click', function () {
 
         // Display the jokes.
-        randomJokes();
         displayJokes();
 
         
@@ -504,7 +503,6 @@ randomBtn.addEventListener('click', function (e) {
   }, 1000)
 
   // Display the jokes.
-  randomJokes();
   displayJokes();
 
   // Checks if recipe results have class 'hide' if so remove
@@ -680,4 +678,5 @@ function displayJokes() {
 var repeatJoke = setInterval(function () {
   randomJokes();
 }, 5000);
+
 
