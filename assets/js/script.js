@@ -147,7 +147,9 @@ function handleSubmit(event) {
 
     })
     // When there is an error, call openModalInvalid function that prompts user about invalid search input
-    .catch(openModalInvalid())
+    .catch(error => {
+      openModalInvalid();
+  });
 }
 
 form.addEventListener("submit", handleSubmit);
