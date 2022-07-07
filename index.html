@@ -47,7 +47,7 @@
             <h3 id="drinkName">Drink Name:</h3>       
             <p>Ingredients:</p>
             <p id="randomDrinkInstructions" class="randomDrinkInstructions">instructions</p> -->
-        </div>       
+        </div>
     </section>
 
     <!-- Cocktail recipe search results -->
@@ -60,6 +60,20 @@
         <div class="randomJokeDisplay"></div>
     </section>
 
+    <!-- Modal prompting user of invalid search input -->
+    <div class="modal" id="modal-invalid">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Invalid input</p>
+                <button class="delete is-large" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <p>No Cocktail Found</p>
+            </section>
+            <footer class="modal-card-foot"></footer>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -68,4 +82,3 @@
 </body>
 
 </html>
-
