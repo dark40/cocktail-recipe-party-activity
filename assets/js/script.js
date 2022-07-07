@@ -618,7 +618,7 @@ randomBtn.addEventListener('click', function (e) {
 
 // Random Jokes function
 function randomJokes() {
-  const jokesURL = "https://v2.jokeapi.dev/joke/Any";
+  const jokesURL = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
 
   fetch(jokesURL)
     .then(function (response) {
