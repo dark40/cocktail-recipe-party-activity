@@ -491,14 +491,12 @@ randomBtn.addEventListener('click', function (e) {
 
   // prevent multiple click
   randomBtn.setAttribute("disabled", "true")
-  let i = 3
+  let i = 2
   let timer = setInterval(function () {
     i--
-    randomBtn.innerHTML = `Random Coketail(${i})`
     if (i === 0) {
       clearInterval(timer)
       randomBtn.disabled = false
-      randomBtn.innerHTML = `Random Coketail`
     }
   }, 1000)
 
