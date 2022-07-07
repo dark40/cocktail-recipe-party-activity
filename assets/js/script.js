@@ -2,114 +2,114 @@
 
 var form = document.querySelector(".searchBar");
 function handleDataFromAPI(data) {
-      cardCocktail.innerHTML = "";
-      const randomDrink = data.drinks[0]
-      const drinkName = randomDrink.strDrink
-      const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
-      const drinkImg = randomDrink.strDrinkThumb
+  cardCocktail.innerHTML = "";
+  const randomDrink = data.drinks[0]
+  const drinkName = randomDrink.strDrink
+  const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
+  const drinkImg = randomDrink.strDrinkThumb
 
-      // get ingredients
-      const wantedIngredients = []
-      for (let i = 1; i < 16; i++) {
-        const key = 'strIngredient' + i
-        const ingredient = randomDrink[key]
-        // console.log(ingredient)
-        if (ingredient) {
-          wantedIngredients.push(ingredient)
-        }
+  // get ingredients
+  const wantedIngredients = []
+  for (let i = 1; i < 16; i++) {
+    const key = 'strIngredient' + i
+    const ingredient = randomDrink[key]
+    // console.log(ingredient)
+    if (ingredient) {
+      wantedIngredients.push(ingredient)
+    }
+  }
+
+  // get measure
+  const wantedMeasure = []
+  for (let i = 1; i < 16; i++) {
+    const key2 = 'strMeasure' + i
+    const measure = randomDrink[key2]
+    // console.log(measure)
+    if (measure) {
+      wantedMeasure.push(measure)
+    }
+  }
+
+  // get ingredientsArray
+  let ingredientsArray = []
+  for (let i = 0; i < wantedIngredients.length; i++) {
+    ingredientsArray.push(wantedMeasure[i])
+    ingredientsArray.push(wantedIngredients[i])
+  }
+
+  // remove odd comma
+  let ingredients = ingredientsArray.toString()
+  // console.log(ingredients)
+  let list = ingredients.split(',')
+  let newIngredients = ''
+  for (let i = 0; i < list.length; i++) {
+    let comma
+    if (i % 2 !== 0) {
+      comma = ''
+      if (i === 0) {
+        comma = ''
       }
-
-      // get measure
-      const wantedMeasure = []
-      for (let i = 1; i < 16; i++) {
-        const key2 = 'strMeasure' + i
-        const measure = randomDrink[key2]
-        // console.log(measure)
-        if (measure) {
-          wantedMeasure.push(measure)
-        }
+      newIngredients += comma + list[i]
+    } else {
+      comma = ','
+      if (i === 0) {
+        comma = ''
       }
+      newIngredients += comma + list[i]
+    }
+  }
 
-      // get ingredientsArray
-      let ingredientsArray = []
-      for (let i = 0; i < wantedIngredients.length; i++) {
-        ingredientsArray.push(wantedMeasure[i])
-        ingredientsArray.push(wantedIngredients[i])
-      }
+  // replace comma with comma and space
+  const ingredientsStr = newIngredients.replaceAll(',', ', ')
+  // change string to array
+  const newIngredientsArray = ingredientsStr.split(', ')
 
-      // remove odd comma
-      let ingredients = ingredientsArray.toString()
-      // console.log(ingredients)
-      let list = ingredients.split(',')
-      let newIngredients = ''
-      for (let i = 0; i < list.length; i++) {
-        let comma
-        if (i % 2 !== 0) {
-          comma = ''
-          if (i === 0) {
-            comma = ''
-          }
-          newIngredients += comma + list[i]
-        } else {
-          comma = ','
-          if (i === 0) {
-            comma = ''
-          }
-          newIngredients += comma + list[i]
-        }
-      }
+  // random img element
+  let createRandomImg = document.createElement('img')
+  createRandomImg.src = drinkImg
+  createRandomImg.alt = drinkName
+  createRandomImg.classList.add('card-img-cocktail')
+  // random drink name
+  let createRandomDrinkName = document.createElement('h3')
+  createRandomDrinkName.textContent = drinkName
+  // cearte a div for text-align
+  let createRandomDiv = document.createElement('div')
+  createRandomDiv.classList.add('align_left')
 
-      // replace comma with comma and space
-      const ingredientsStr = newIngredients.replaceAll(',', ', ')
-      // change string to array
-      const newIngredientsArray = ingredientsStr.split(', ')
+  // random instructions
+  let createRandomInstructions = document.createElement('p')
+  createRandomInstructions.innerHTML = instructions
 
-      // random img element
-      let createRandomImg = document.createElement('img')
-      createRandomImg.src = drinkImg
-      createRandomImg.alt = drinkName
-      createRandomImg.classList.add('card-img-cocktail')
-      // random drink name
-      let createRandomDrinkName = document.createElement('h3')
-      createRandomDrinkName.textContent = drinkName
-      // cearte a div for text-align
-      let createRandomDiv = document.createElement('div')
-      createRandomDiv.classList.add('align_left')
+  let createBr = document.createElement('br')
 
-      // random instructions
-      let createRandomInstructions = document.createElement('p')
-      createRandomInstructions.innerHTML = instructions
+  // create ingredentList
+  let createIngredentList = document.createElement('p')
+  createIngredentList.innerHTML = `<span class="textWeight">Ingredients: </span>`
 
-      let createBr = document.createElement('br')
+  // append element
+  cardCocktail.classList.add('card-cocktail')
+  cardCocktail.appendChild(createRandomImg)
+  cardCocktail.appendChild(createRandomDrinkName)
+  cardCocktail.appendChild(createBr)
+  cardCocktail.appendChild(createRandomDiv)
+  createRandomDiv.appendChild(createIngredentList)
 
-      // create ingredentList
-      let createIngredentList = document.createElement('p')
-      createIngredentList.innerHTML = `<span class="textWeight">Ingredients: </span>`
-
-      // append element
-      cardCocktail.classList.add('card-cocktail')
-      cardCocktail.appendChild(createRandomImg)
-      cardCocktail.appendChild(createRandomDrinkName)
-      cardCocktail.appendChild(createBr)
-      cardCocktail.appendChild(createRandomDiv)
-      createRandomDiv.appendChild(createIngredentList)
-
-      // loot the ingredient string and get each value
-      let ingredientList = ''
-      for (let i = 0; i < newIngredientsArray.length; i++) {
-        ingredientList = newIngredientsArray[i]
-        // console.log(ingredientList)
-        const showIngredients = `<ul class="ingredient-list">
+  // loot the ingredient string and get each value
+  let ingredientList = ''
+  for (let i = 0; i < newIngredientsArray.length; i++) {
+    ingredientList = newIngredientsArray[i]
+    // console.log(ingredientList)
+    const showIngredients = `<ul class="ingredient-list">
               <li>${ingredientList}</li>
               </ul>`
-        // create random ingredients element
-        let createRandomIngredients = document.createElement('p')
-        createRandomIngredients.innerHTML = showIngredients
-        // append
-        createRandomDiv.appendChild(createRandomIngredients)
-      }
-      // createRandomDiv.appendChild(createRandomIngredients)
-      createRandomDiv.appendChild(createRandomInstructions)
+    // create random ingredients element
+    let createRandomIngredients = document.createElement('p')
+    createRandomIngredients.innerHTML = showIngredients
+    // append
+    createRandomDiv.appendChild(createRandomIngredients)
+  }
+  // createRandomDiv.appendChild(createRandomIngredients)
+  createRandomDiv.appendChild(createRandomInstructions)
 }
 
 function hidePrevResult() {
@@ -124,9 +124,9 @@ function hidePrevResult() {
 }
 
 function handleSubmit(event) {
-    event.preventDefault()
+  event.preventDefault()
 
-    hidePrevResult();
+  hidePrevResult();
 
   // console.log("submitted")
   var userInput = form.inputBox.value
@@ -138,7 +138,7 @@ function handleSubmit(event) {
     })
     .then(function (data) {
       storeHistory(userInput);
-    
+
       displayHistory();
       handleDataFromAPI(data);
 
@@ -156,9 +156,9 @@ form.addEventListener("submit", handleSubmit);
 let searchHistory = $("#searchHistory");
 let drink;
 
-function handleClickonHistory(){
-    
-      drink = $(this).text();
+function handleClickonHistory() {
+
+  drink = $(this).text();
   hidePrevResult();
   var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
   fetch(serachNameUrl)
@@ -169,39 +169,39 @@ function handleClickonHistory(){
     .then(function (data) {
       handleDataFromAPI(data);
     })
-  }
-  
+}
+
 
 
 
 function storeHistory(history) {
-      if (history) {
-        let historyList = (localStorage.getItem("cocktail-history") === null) ? [] : JSON.parse(localStorage.getItem("cocktail-history"));
+  if (history) {
+    let historyList = (localStorage.getItem("cocktail-history") === null) ? [] : JSON.parse(localStorage.getItem("cocktail-history"));
 
-        if (!historyList.includes(history)) {
-            historyList = [...historyList, history];
-        }
-        localStorage.setItem("cocktail-history", JSON.stringify(historyList));
+    if (!historyList.includes(history)) {
+      historyList = [...historyList, history];
     }
+    localStorage.setItem("cocktail-history", JSON.stringify(historyList));
+  }
 }
 
-function displayHistory(){
-    let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
-    searchHistory.empty();
-    
-    if (historyList) {
-      for (let i = 0; i < historyList.length; i++) {
-        let historyItemEl = $("<div class='block'></div>");
-        let historySpanEl = $("<span class='tag is-info button is-light is-medium is-rounded'>" + historyList[i] + "</span>");
-        let deleteBtnEl = $("<button class='delete is-small'></button>");
-        deleteBtnEl.click(handleDelete);
-        historySpanEl.append(deleteBtnEl);
-        historyItemEl.append(historySpanEl);
-        historyItemEl.click(handleClickonHistory);
-        
-        searchHistory.append(historyItemEl);
-      }
+function displayHistory() {
+  let historyList = JSON.parse(localStorage.getItem("cocktail-history"));
+  searchHistory.empty();
+
+  if (historyList) {
+    for (let i = 0; i < historyList.length; i++) {
+      let historyItemEl = $("<div class='block'></div>");
+      let historySpanEl = $("<span class='tag is-info button is-light is-medium is-rounded'>" + historyList[i] + "</span>");
+      let deleteBtnEl = $("<button class='delete is-small'></button>");
+      deleteBtnEl.click(handleDelete);
+      historySpanEl.append(deleteBtnEl);
+      historyItemEl.append(historySpanEl);
+      historyItemEl.click(handleClickonHistory);
+
+      searchHistory.append(historyItemEl);
     }
+  }
 }
 
 function handleDelete(e) {
@@ -380,7 +380,7 @@ function getRandom() {
         // Display the jokes.
         displayJokes();
 
-        
+
         randomEleHolder.classList.add('hide')
         recipeResult.classList.remove('hide')
         const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`
@@ -488,6 +488,19 @@ randomEleHolder.addEventListener('mouseleave', function () {
 // add event listener for button
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
+
+  // prevent multiple click
+  randomBtn.setAttribute("disabled", "true")
+  let i = 3
+  let timer = setInterval(function () {
+    i--
+    randomBtn.innerHTML = `Random Coketail(${i})`
+    if (i === 0) {
+      clearInterval(timer)
+      randomBtn.disabled = false
+      randomBtn.innerHTML = `Random Coketail`
+    }
+  }, 1000)
 
   // Display the jokes.
   displayJokes();
