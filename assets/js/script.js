@@ -1,4 +1,3 @@
-
 // Function to provide search functionality to search bar
 
 var form = document.querySelector(".searchBar");
@@ -8,7 +7,6 @@ function handleDataFromAPI(data) {
       const drinkName = randomDrink.strDrink
       const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
       const drinkImg = randomDrink.strDrinkThumb
-      const drinkID = randomDrink.idDrink
 
       // get ingredients
       const wantedIngredients = []
@@ -145,6 +143,8 @@ function handleSubmit(event) {
       handleDataFromAPI(data);
 
     })
+    // When there is an error, call openModalInvalid function that prompts user about invalid search input
+    .catch(openModalInvalid())
 }
 
 form.addEventListener("submit", handleSubmit);
@@ -192,7 +192,7 @@ function displayHistory(){
     if (historyList) {
       for (let i = 0; i < historyList.length; i++) {
         let historyItemEl = $("<div class='block'></div>");
-        let historySpanEl = $("<span class='tag is-info button is-light'>" + historyList[i] + "</span>");
+        let historySpanEl = $("<span class='tag is-info button is-light is-medium is-rounded'>" + historyList[i] + "</span>");
         let deleteBtnEl = $("<button class='delete is-small'></button>");
         deleteBtnEl.click(handleDelete);
         historySpanEl.append(deleteBtnEl);
@@ -489,19 +489,6 @@ randomEleHolder.addEventListener('mouseleave', function () {
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
 
-  // prevent multiple click
-  randomBtn.setAttribute("disabled", "true")
-  let i = 5
-  let timer = setInterval(function () {
-    i--
-    randomBtn.innerHTML = `Random Coketail(${i})`
-    if (i === 0) {
-      clearInterval(timer)
-      randomBtn.disabled = false
-      randomBtn.innerHTML = `Random Coketail`
-    }
-  }, 1000)
-
   // Display the jokes.
   displayJokes();
 
@@ -679,4 +666,56 @@ var repeatJoke = setInterval(function () {
   randomJokes();
 }, 5000);
 
+// Adding JS trigger for modal
+document.addEventListener('DOMContentLoaded', () => {
+  // Functions to open and close a modal
+  function openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
+
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
+
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
+
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
+
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
+
+    if (e.keyCode === 27) { // Escape key
+      closeAllModals();
+    }
+  });
+});
+
+// Function to open modal
+function openModalInvalid() {
+  var triggerModal = document.getElementById("modal-invalid")
+  triggerModal.classList.add('is-active')
+  form.inputBox.value = "";
+}
 

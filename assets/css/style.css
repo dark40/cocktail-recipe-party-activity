@@ -44,11 +44,52 @@ section {
 
 /* Random cocktail button */
 .randomBtn {
+    position: relative;
+    display: inline-block;
     padding: 8px 20px;
     border-radius: 15px;
     color: white;
     background-color: #5E34BE;
     font-size: 20px;
+    border: 1px solid #4e1ec0;
+    outline: none;
+    transform-style: preserve-3d;
+    margin: 0 0 20px 0;
+    transition: 0.15s cubic-bezier(0, 0, .6, 1);
+}
+
+.randomBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    background-color: #bba8e8;
+    border: inherit;
+    outline: none;
+    transform: translate3D(0, .75em, -1em);
+    transition: 0.15s cubic-bezier(0, 0, .6, 1);
+}
+/* Button animations */
+.randomBtn:hover {
+    cursor: pointer;
+    transform: translate(0, 0.25em);
+}
+
+.randomBtn:hover::before {
+    transform:  translate3d(0, .5em, -1em);
+}
+
+.randomBtn:active {
+    transform: translate(0, 0.75em);
+}
+
+.randomBtn:active::before {
+    transform: translate3d(0, 0, -1em);
 }
 
 /* Search bar */
@@ -86,6 +127,7 @@ section {
 
 #searchBtn:hover {
     background-color: #E5C3F5;
+    cursor: pointer;
 }
 
 /* Set style for random drink feature */
@@ -113,6 +155,7 @@ section {
 
 .randomEleHolder:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .randomImg {
@@ -175,7 +218,9 @@ section {
 .randomJokeDisplay p {
     display: inline-block;
     vertical-align: middle;
+    margin: 15px;
   }
+
 
 
 
