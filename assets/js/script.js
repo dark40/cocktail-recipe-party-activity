@@ -137,7 +137,10 @@ function handleSubmit(event) {
       return res
     })
     .then(function (data) {
-      storeHistory(userInput);
+      if(data.drinks){
+        storeHistory(userInput);
+      }
+      
 
       displayHistory();
       handleDataFromAPI(data);
@@ -169,10 +172,8 @@ function handleClickonHistory() {
     .then(function (data) {
       handleDataFromAPI(data);
     })
+    
 }
-
-
-
 
 function storeHistory(history) {
   if (history) {
