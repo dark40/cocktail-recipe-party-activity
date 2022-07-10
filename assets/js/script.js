@@ -1,5 +1,7 @@
 // Function to provide search functionality to search bar
 
+const container = document.createElement('div');
+
 var form = document.querySelector(".searchBar");
 function handleDataFromAPI(data) {
   cardCocktail.innerHTML = "";
@@ -126,6 +128,9 @@ function hidePrevResult() {
 function handleSubmit(event) {
   event.preventDefault()
 
+  // display the jokes.
+  displayJokes();
+
   hidePrevResult();
 
   // console.log("submitted")
@@ -137,10 +142,10 @@ function handleSubmit(event) {
       return res
     })
     .then(function (data) {
-      if(data.drinks){
+      if (data.drinks) {
         storeHistory(userInput);
       }
-      
+
 
       displayHistory();
       handleDataFromAPI(data);
@@ -149,7 +154,7 @@ function handleSubmit(event) {
     // When there is an error, call openModalInvalid function that prompts user about invalid search input
     .catch(error => {
       openModalInvalid();
-  });
+    });
 }
 
 form.addEventListener("submit", handleSubmit);
@@ -163,6 +168,9 @@ let drink;
 
 function handleClickonHistory() {
 
+  // Display jokes. 
+  displayJokes();
+
   drink = $(this).text();
   hidePrevResult();
   var serachNameUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
@@ -174,7 +182,7 @@ function handleClickonHistory() {
     .then(function (data) {
       handleDataFromAPI(data);
     })
-    
+
 }
 
 function storeHistory(history) {
@@ -294,10 +302,12 @@ const randomBtn = document.querySelector('#randomBtn')
 
 // Cocktails---function for random drinks for every 8sec
 // remove time gap
+
+
 getRandom()
 // function for getRandom data and render when click
 function getRandom() {
-  randomEleHolder.innerHTML = ''
+
   const randomUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
   fetch(randomUrl)
     .then(function (response) {
@@ -309,6 +319,10 @@ function getRandom() {
     .then(function (data) {
       // console.log(data)
       // get values 
+
+      randomEleHolder.innerHTML = ''
+      container.innerHTML = "";
+
       const randomDrink = data.drinks[0]
       const drinkName = randomDrink.strDrink
       const instructions = `<span class="textWeight">Instructions: </span>${randomDrink.strInstructions}`
@@ -377,11 +391,11 @@ function getRandom() {
 
       // add event listener to random display
       // when click on randomEleHolder, it will rander search result by ID
-      const container = document.createElement('div');
+
+
+
       container.addEventListener('click', function () {
 
-        // Display the jokes.
-        displayJokes();
 
 
         randomEleHolder.classList.add('hide')
@@ -448,6 +462,7 @@ function getRandom() {
           })
       })
 
+
       randomEleHolder.append(container)
       // random img
       let createRandomImg = document.createElement('img')
@@ -489,6 +504,7 @@ randomEleHolder.addEventListener('mouseleave', function () {
 // -------------------------------------------------------------
 
 // add event listener for button
+
 randomBtn.addEventListener('click', function (e) {
   e.preventDefault()
 
@@ -630,6 +646,11 @@ randomBtn.addEventListener('click', function (e) {
     })
 })
 
+
+container.addEventListener('click', displayJokes);
+
+
+
 // Random Jokes function
 function randomJokes() {
   const jokesURL = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit";
@@ -642,6 +663,7 @@ function randomJokes() {
       return response.json();
     })
     .then(function (data) {
+
       showJokes(data);
     })
     .catch(console.err);
@@ -653,7 +675,6 @@ function showJokes(obj) {
   let jokeEl = document.querySelector(".randomJokeDisplay");
 
   jokeEl.replaceChildren();
-
 
   let joke = document.createElement("p");
   joke.innerHTML = obj.joke || [];
@@ -670,15 +691,21 @@ function showJokes(obj) {
 
 // Set time interval for showing jokes every 5 seconds.
 
+var loop = false;
+
 function displayJokes() {
 
-  randomJokes();
-  repeatJoke;
-}
+  if (loop === false) {
 
-var repeatJoke = setInterval(function () {
-  randomJokes();
-}, 5000);
+    randomJokes();
+
+    setInterval(randomJokes, 5000);
+    
+    loop = true; 
+
+}}
+
+
 
 // Adding JS trigger for modal
 document.addEventListener('DOMContentLoaded', () => {
