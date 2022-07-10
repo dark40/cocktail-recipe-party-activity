@@ -691,22 +691,19 @@ function showJokes(obj) {
 
 // Set time interval for showing jokes every 5 seconds.
 
+var loop = false;
+
 function displayJokes() {
 
-  if (!repeatJoke) {
+  if (loop === false) {
 
     randomJokes();
 
-    var repeatJoke = setInterval(randomJokes, 5000)
+    setInterval(randomJokes, 5000);
+    
+    loop = true; 
 
-  } else {
-    clearInterval(repeatJoke);
-  }
-
-
-
-
-}
+}}
 
 
 
