@@ -29,3 +29,5 @@ https://bulma.io
 
 
 ## Screenshots
+![Desktop Version](./assets/img/desktop.png)
+![Mobile Version](./assets/img/mobile.png)
