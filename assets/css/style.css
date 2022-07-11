@@ -12,8 +12,21 @@ header {
     width: 100%;
     background-color: #282A36;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+/* Home button styling */
+#homeButton {
+    color: white;
+    background-color: #282A36;
+    border: none;
+    outline: none;
+    margin-right: 10px;
+}
+
+#homeButton:hover {
+    cursor: pointer;
 }
 
 h1 {
@@ -21,6 +34,8 @@ h1 {
     font-size: 40px;
     font-weight: 600;
     letter-spacing: 2px;
+    margin-left: 25px;
+    line-height: 40px;
 }
 
 h2 {
