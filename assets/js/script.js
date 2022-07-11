@@ -760,3 +760,8 @@ function openModalInvalid() {
   form.inputBox.value = "";
 }
 
+// Function to refresh page when home button is clicked
+var homeButton = document.getElementById("homeButton")
+homeButton.addEventListener("click", function() {
+  window.location.reload();
+})
